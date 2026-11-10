@@ -1,255 +1,86 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Contact | AEM Deep Dive</title>
-<style>
-  :root {
-    --bg: #0F172A; --card: #111C33; --border: #1E293B; --text: #F8FAFC; --muted: #94A3B8;
-    --field: #0B1324; --field-border: #334155; --focus: #38BDF8; --ok: #34D399; --err: #F87171;
-    --btn-text: #FFFFFF;
-  }
-  :root[data-theme="light"] {
-    --bg: #FFFFFF; --card: #FFFFFF; --border: #E2E8F0; --text: #0F172A; --muted: #475569;
-    --field: #F8FAFC; --field-border: #CBD5E1; --focus: #2563EB; --ok: #15803D; --err: #B91C1C;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    font-size: 16px; line-height: 1.5; color: var(--text); background: transparent;
-  }
-  .card {
-    margin: 0 auto; padding: 24px; border: 1px solid var(--border);
-    border-radius: 0px; background: var(--card);
-  }
-  h1 { margin: 0 0 4px; font-size: 1.35rem; line-height: 1.3; }
-  .lead { margin: 0 0 20px; color: var(--muted); font-size: 0.95rem; }
-  .field { margin-bottom: 16px; }
-  label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.92rem; }
-  .req { color: var(--muted); font-weight: 400; }
-  input[type="text"], input[type="email"], select, textarea {
-    width: 100%; padding: 11px 12px; font: inherit; color: var(--text);
-    background: var(--field); border: 1px solid var(--field-border); border-radius: 12px;
-  }
-  textarea { min-height: 140px; resize: vertical; }
-  input:focus, select:focus, textarea:focus, button:focus-visible {
-    outline: 3px solid var(--focus); outline-offset: 1px;
-  }
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 520px) { .row { grid-template-columns: 1fr; gap: 0; } .card { padding: 18px; } }
-  .field-error { margin: 6px 0 0; color: var(--err); font-size: 0.85rem; min-height: 1em; }
-  [aria-invalid="true"] { border-color: var(--err) !important; }
-  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-  .captcha { margin: 4px 0 16px; min-height: 78px; }
-  button[type="submit"] {
-    width: 100%; padding: 13px 18px; font: inherit; font-weight: 700; color: var(--btn-text);
-    border: 0; border-radius: 14px; cursor: pointer;
-    background: linear-gradient(135deg, #0D9488, #2563EB 45%, #7C3AED 75%, #DB2777);
-  }
-  button[disabled] { opacity: 0.6; cursor: progress; }
-  #status { margin: 14px 0 0; padding: 0; font-size: 0.95rem; }
-  #status.show { padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); }
-  #status.ok { color: var(--ok); border-color: var(--ok); }
-  #status.error { color: var(--err); border-color: var(--err); }
-  #status.info { color: var(--muted); }
-  .privacy { margin: 14px 0 0; color: var(--muted); font-size: 0.82rem; }
-  .fallback { margin-top: 8px; color: var(--muted); font-size: 0.85rem; }
-  noscript p { color: var(--err); }
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Contact | AEM Deep Dive</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<main class="card">
-  <h1>Send me a message</h1>
-  <p class="lead">Questions, corrections, topic ideas or project enquiries are all welcome. I usually reply within a few days.</p>
+    <main class="card">
+        <h1>Send me a message</h1>
+        <p class="lead">Questions, corrections, topic ideas or project enquiries are all welcome. I usually reply within
+            a few days.</p>
 
-  <form id="contact-form" novalidate>
-    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <form id="contact-form" novalidate>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-    <div class="row">
-      <div class="field">
-        <label for="name">Name <span class="req">(required)</span></label>
-        <input id="name" name="name" type="text" autocomplete="name" maxlength="100" required aria-describedby="name-err">
-        <p class="field-error" id="name-err"></p>
-      </div>
-      <div class="field">
-        <label for="email">Email <span class="req">(required)</span></label>
-        <input id="email" name="email" type="email" autocomplete="email" maxlength="200" required aria-describedby="email-err">
-        <p class="field-error" id="email-err"></p>
-      </div>
-    </div>
+            <div class="row">
+                <div class="field">
+                    <label for="name">Name <span class="req">(required)</span></label>
+                    <input id="name" name="name" type="text" autocomplete="name" maxlength="100" required
+                        aria-describedby="name-err">
+                    <p class="field-error" id="name-err"></p>
+                </div>
+                <div class="field">
+                    <label for="email">Email <span class="req">(required)</span></label>
+                    <input id="email" name="email" type="email" autocomplete="email" maxlength="200" required
+                        aria-describedby="email-err">
+                    <p class="field-error" id="email-err"></p>
+                </div>
+            </div>
 
-    <div class="row">
-      <div class="field">
-        <label for="topic">Topic <span class="req">(required)</span></label>
-        <select id="topic" name="topic" required aria-describedby="topic-err">
-          <option value="">Choose a topic</option>
-          <option>Question about a post</option>
-          <option>Correction or outdated information</option>
-          <option>Topic idea</option>
-          <option>Freelance or consulting</option>
-          <option>Guest post or collaboration</option>
-          <option>Something else</option>
-        </select>
-        <p class="field-error" id="topic-err"></p>
-      </div>
-      <div class="field">
-        <label for="aem_version">AEM version <span class="req">(optional)</span></label>
-        <select id="aem_version" name="aem_version">
-          <option value="">Not sure or not relevant</option>
-          <option>AEM as a Cloud Service</option>
-          <option>AEM 6.5</option>
-          <option>AEM 6.4 or older</option>
-        </select>
-      </div>
-    </div>
+            <div class="row">
+                <div class="field">
+                    <label for="topic">Topic <span class="req">(required)</span></label>
+                    <select id="topic" name="topic" required aria-describedby="topic-err">
+                        <option value="">Choose a topic</option>
+                        <option>Question about a post</option>
+                        <option>Correction or outdated information</option>
+                        <option>Topic idea</option>
+                        <option>Freelance or consulting</option>
+                        <option>Guest post or collaboration</option>
+                        <option>Something else</option>
+                    </select>
+                    <p class="field-error" id="topic-err"></p>
+                </div>
+                <div class="field">
+                    <label for="aem_version">AEM version <span class="req">(optional)</span></label>
+                    <select id="aem_version" name="aem_version">
+                        <option value="">Not sure or not relevant</option>
+                        <option>AEM as a Cloud Service</option>
+                        <option>AEM 6.5</option>
+                        <option>AEM 6.4 or older</option>
+                    </select>
+                </div>
+            </div>
 
-    <div class="field">
-      <label for="message">Message <span class="req">(required)</span></label>
-      <textarea id="message" name="message" maxlength="3000" required aria-describedby="message-err"
-                placeholder="What are you working on, what did you try, and any error message? Please leave out passwords, tokens and confidential details."></textarea>
-      <p class="field-error" id="message-err"></p>
-    </div>
+            <div class="field">
+                <label for="message">Message <span class="req">(required)</span></label>
+                <textarea id="message" name="message" maxlength="3000" required aria-describedby="message-err"
+                    placeholder="What are you working on, what did you try, and any error message? Please leave out passwords, tokens and confidential details."></textarea>
+                <p class="field-error" id="message-err"></p>
+            </div>
 
-    <!-- hCaptcha -->
-    <div class="captcha"><div class="h-captcha" data-captcha="true"></div></div>
+            <!-- hCaptcha -->
+            <div class="captcha">
+                <div class="h-captcha" data-captcha="true"></div>
+            </div>
 
-    <button type="submit" id="send">Send message</button>
-    <p id="status" role="status" aria-live="polite"></p>
-    <p class="fallback" id="fallback" hidden></p>
-    <p class="privacy">I only use your details to reply to your message.</p>
-    <noscript><p>This form needs JavaScript. Please enable it and reload the page.</p></noscript>
-  </form>
-</main>
-
-<script>
-const CONFIG = {
-  accessKey: "efbceb6c-e2b4-42bb-afbe-de3986208f35",     
-  subject: "New message from the AEM Deep Dive contact form",
-  fromName: "AEM Deep Dive contact form",
-  fallbackEmail: "AEMDeepDive@Outlook.com",                                      
-  maxMessage: 3000
-};
-(function () {
-  var params = new URLSearchParams(window.location.search);
-  var theme = params.get("theme");
-  if (theme !== "light" && theme !== "dark") {
-    theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-  }
-  document.documentElement.setAttribute("data-theme", theme);
-  document.querySelector(".h-captcha").setAttribute("data-theme", theme);
-
-  var form = document.getElementById("contact-form");
-  var statusEl = document.getElementById("status");
-  var sendBtn = document.getElementById("send");
-  var fallbackEl = document.getElementById("fallback");
-
-  function el(n) { return form.elements.namedItem(n); }
-  function val(n) { var e = el(n); return e ? e.value : ""; }
-
-  function setStatus(kind, text) {
-    statusEl.className = "show " + kind;
-    statusEl.textContent = text;
-  }
-  function clearStatus() { statusEl.className = ""; statusEl.textContent = ""; }
-  function fieldError(id, text) {
-    var input = document.getElementById(id);
-    var err = document.getElementById(id + "-err");
-    if (err) err.textContent = text || "";
-    if (input) { if (text) input.setAttribute("aria-invalid", "true"); else input.removeAttribute("aria-invalid"); }
-  }
-  function showFallback() {
-    if (CONFIG.fallbackEmail) {
-      fallbackEl.hidden = false;
-      fallbackEl.textContent = "You can also email me at " + CONFIG.fallbackEmail + ".";
-    }
-  }
-  function validate() {
-    var ok = true;
-    var name = val("name").trim();
-    var email = val("email").trim();
-    var topic = val("topic");
-    var message = val("message").trim();
-    fieldError("name", ""); fieldError("email", ""); fieldError("topic", ""); fieldError("message", "");
-    if (!name) { fieldError("name", "Please enter your name."); ok = false; }
-    if (!email) { fieldError("email", "Please enter your email."); ok = false; }
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fieldError("email", "Please enter a valid email address."); ok = false; }
-    if (!topic) { fieldError("topic", "Please choose a topic."); ok = false; }
-    if (!message) { fieldError("message", "Please enter a message."); ok = false; }
-    else if (message.length > CONFIG.maxMessage) { fieldError("message", "Please keep the message under " + CONFIG.maxMessage + " characters."); ok = false; }
-    return ok;
-  }
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    clearStatus();
-    fallbackEl.hidden = true;
-
-    if (!CONFIG.accessKey || CONFIG.accessKey.indexOf("PASTE_") === 0) {
-      setStatus("error", "This form is not set up yet. The access key is missing.");
-      return;
-    }
-    if (!validate()) {
-      setStatus("error", "Please fix the highlighted fields.");
-      return;
-    }
-    var captchaField = form.querySelector('textarea[name="h-captcha-response"]');
-    if (!captchaField) {
-      setStatus("error", "The captcha did not load. Try another browser, or turn off tracking protection for this page, then reload.");
-      showFallback();
-      return;
-    }
-    if (!captchaField.value) {
-      setStatus("error", "Please complete the captcha check.");
-      return;
-    }
-
-    var data = {
-      access_key: CONFIG.accessKey,
-      subject: CONFIG.subject,
-      from_name: CONFIG.fromName,
-      name: val("name").trim(),
-      email: val("email").trim(),
-      topic: val("topic"),
-      aem_version: val("aem_version") || "Not specified",
-      message: val("message").trim(),
-      botcheck: el("botcheck") && el("botcheck").checked ? "on" : "",
-      "h-captcha-response": captchaField.value
-    };
-
-    sendBtn.disabled = true;
-    setStatus("info", "Sending...");
-
-    fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(data)
-    })
-      .then(function (res) { return res.json().then(function (json) { return { ok: res.ok, json: json }; }); })
-      .then(function (result) {
-        if (result.ok && result.json && result.json.success) {
-          form.reset();
-          setStatus("ok", "Thank you. Your message was sent, and I'll reply by email.");
-        } else {
-          var msg = result.json && result.json.message ? result.json.message : "Something went wrong.";
-          setStatus("error", "Your message could not be sent: " + msg);
-          showFallback();
-        }
-      })
-      .catch(function () {
-        setStatus("error", "Network problem. Please check your connection and try again.");
-        showFallback();
-      })
-      .then(function () {
-        sendBtn.disabled = false;
-        if (window.hcaptcha && typeof window.hcaptcha.reset === "function") { try { window.hcaptcha.reset(); } catch (e) {} }
-      });
-  });
-})();
-</script>
-<!-- Web3Forms script: loads and manages hCaptcha. Keep it after the form. -->
-<script src="https://web3forms.com/client/script.js" async defer></script>
+            <button type="submit" id="send">Send message</button>
+            <p id="status" role="status" aria-live="polite"></p>
+            <p class="fallback" id="fallback" hidden></p>
+            <p class="privacy">I only use your details to reply to your message.</p>
+            <noscript>
+                <p>This form needs JavaScript. Please enable it and reload the page.</p>
+            </noscript>
+        </form>
+    </main>
+    <script src="script.js" defer></script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
+
 </html>

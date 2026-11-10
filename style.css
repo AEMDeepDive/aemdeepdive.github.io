@@ -1,16 +1,29 @@
+/* =====================================================
+   AEM Deep Dive - Contact Form Stylesheet
+   ===================================================== */
+
+/* ================= THEME VARIABLES ================= */
+
 :root {
-  --bg: #0F172A;
+  --bg: #0D0F14;
   --card: #111C33;
   --border: #1E293B;
   --text: #F8FAFC;
   --muted: #94A3B8;
+
   --field: #0B1324;
   --field-border: #334155;
+
   --focus: #38BDF8;
   --ok: #34D399;
   --err: #F87171;
+
   --btn-text: #FFFFFF;
+
+  color-scheme: dark;
 }
+
+/* ================= LIGHT THEME ================= */
 
 :root[data-theme="light"] {
   --bg: #FFFFFF;
@@ -18,12 +31,18 @@
   --border: #E2E8F0;
   --text: #0F172A;
   --muted: #475569;
+
   --field: #F8FAFC;
   --field-border: #CBD5E1;
+
   --focus: #2563EB;
   --ok: #15803D;
   --err: #B91C1C;
+
+  color-scheme: light;
 }
+
+/* ================= GLOBAL STYLES ================= */
 
 * {
   box-sizing: border-box;
@@ -31,41 +50,83 @@
 
 html {
   min-height: 100%;
-  background: var(--bg);
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
   font-size: 16px;
   line-height: 1.5;
+
   color: var(--text);
-  background: var(--bg);
+  background-color: var(--bg);
 }
+
+
+/* ================= HASHNODE EMBED MODE ================= */
+
+/*
+   Activated when the iframe URL contains:
+   ?theme=dark&embed=true
+
+   The standalone page retains its dark background.
+   Only the embedded page becomes transparent.
+*/
+
+html[data-embed="true"],
+html[data-embed="true"] body {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+
+/* ================= CONTACT CARD ================= */
 
 .card {
   width: 100%;
   max-width: 640px;
+
   margin: 0 auto;
   padding: 24px;
+
   border: 1px solid var(--border);
   border-radius: 20px;
-  background: var(--card);
+
+  background-color: var(--card);
 }
+
+
+/* ================= HEADING & DESCRIPTION ================= */
 
 h1 {
   margin: 0 0 4px;
+
   font-size: 1.35rem;
   line-height: 1.3;
 }
 
 .lead {
   margin: 0 0 20px;
+
   color: var(--muted);
   font-size: 0.95rem;
 }
+
+
+/* ================= FORM FIELDS ================= */
 
 .field {
   min-width: 0;
@@ -74,7 +135,9 @@ h1 {
 
 label {
   display: block;
+
   margin-bottom: 6px;
+
   font-weight: 600;
   font-size: 0.92rem;
 }
@@ -84,17 +147,25 @@ label {
   font-weight: 400;
 }
 
+
+/* ================= INPUTS & SELECTS ================= */
+
 input[type="text"],
 input[type="email"],
 select,
 textarea {
   display: block;
+
   width: 100%;
   min-width: 0;
+
   padding: 11px 12px;
+
   font: inherit;
   color: var(--text);
-  background: var(--field);
+
+  background-color: var(--field);
+
   border: 1px solid var(--field-border);
   border-radius: 12px;
 }
@@ -104,6 +175,9 @@ textarea {
   resize: vertical;
 }
 
+
+/* ================= FOCUS STATES ================= */
+
 input:focus,
 select:focus,
 textarea:focus,
@@ -112,15 +186,26 @@ button:focus-visible {
   outline-offset: 1px;
 }
 
+
+/* ================= FORM GRID ================= */
+
 .row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, 1fr);
+
   gap: 16px;
 }
 
+
+/* ================= VALIDATION ERRORS ================= */
+
 .field-error {
   min-height: 1em;
+
   margin: 6px 0 0;
+
   color: var(--err);
   font-size: 0.85rem;
 }
@@ -129,30 +214,58 @@ button:focus-visible {
   border-color: var(--err) !important;
 }
 
+
+/* ================= HONEYPOT ================= */
+
 .hp {
   position: absolute;
+
   left: -9999px;
+
   width: 1px;
   height: 1px;
+
   opacity: 0;
 }
 
+
+/* ================= HCAPTCHA ================= */
+
 .captcha {
   min-height: 78px;
+
   margin: 4px 0 16px;
+
   overflow-x: auto;
 }
 
+
+/* ================= SUBMIT BUTTON ================= */
+
 button[type="submit"] {
   width: 100%;
+
   padding: 13px 18px;
+
   font: inherit;
   font-weight: 700;
+
   color: var(--btn-text);
+
   border: 0;
   border-radius: 14px;
+
   cursor: pointer;
-  background: linear-gradient(135deg, #0D9488, #2563EB 45%, #7C3AED 75%, #DB2777);
+
+  background: linear-gradient(135deg,
+      #0D9488,
+      #2563EB 45%,
+      #7C3AED 75%,
+      #DB2777);
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  filter: brightness(1.08);
 }
 
 button[disabled] {
@@ -160,14 +273,19 @@ button[disabled] {
   cursor: progress;
 }
 
+
+/* ================= STATUS MESSAGES ================= */
+
 #status {
   margin: 14px 0 0;
   padding: 0;
+
   font-size: 0.95rem;
 }
 
 #status.show {
   padding: 12px 14px;
+
   border: 1px solid var(--border);
   border-radius: 12px;
 }
@@ -186,14 +304,19 @@ button[disabled] {
   color: var(--muted);
 }
 
+
+/* ================= PRIVACY & FALLBACK ================= */
+
 .privacy {
   margin: 14px 0 0;
+
   color: var(--muted);
   font-size: 0.82rem;
 }
 
 .fallback {
   margin-top: 8px;
+
   color: var(--muted);
   font-size: 0.85rem;
 }
@@ -202,7 +325,11 @@ noscript p {
   color: var(--err);
 }
 
+
+/* ================= RESPONSIVE DESIGN ================= */
+
 @media (max-width: 520px) {
+
   .row {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
@@ -211,4 +338,5 @@ noscript p {
   .card {
     padding: 18px;
   }
+
 }

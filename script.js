@@ -8,6 +8,10 @@ const CONFIG = {
 (function () {
   var params = new URLSearchParams(window.location.search);
   var theme = params.get("theme");
+  
+  if (params.get("embed") === "true") {
+    document.documentElement.setAttribute("data-embed", "true");
+  }
 
   if (theme !== "light" && theme !== "dark") {
     theme = window.matchMedia &&
